@@ -11,7 +11,7 @@ namespace Theme\Onepager;
  * You will need this when you append child pages to the main page in the sense of a onepager or
  * when you list all pages in a single onepager.
  */
-class Links {
+class Onepager {
 	/**
 	 * Theme Type
 	 *
