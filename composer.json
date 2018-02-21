@@ -4,7 +4,7 @@
     "description": "Onepager functionality for WordPress themes",
     "license": "MIT",
     "require": {
-      "mindkomm/theme-lib-links": "dev-master",
+      "mindkomm/theme-lib-links": "^1.0",
       "php": ">=7.0.0"
     },
     "autoload": {
