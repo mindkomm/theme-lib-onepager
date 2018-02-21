@@ -1,7 +1,7 @@
 {
     "name": "mindkomm/theme-lib-onepager",
     "type": "library",
-    "description": "Helper classes for Onepager functionality for WordPress themes",
+    "description": "Onepager functionality for WordPress themes",
     "license": "MIT",
     "require": {
       "mindkomm/theme-lib-links": "dev-master",

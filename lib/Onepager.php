@@ -10,10 +10,10 @@ use Theme\Onepager\Integrations\Yoast;
  * Class Onepager
  *
  * Overwrites URL for child pages to be anchor links. Replaces last segment of a URL with # prefix
- * and removes trailing slash e.g. /hotel/host/ > /hotel/#host.
+ * and removes trailing slash. For example: /hotel/host/ > /hotel/#host.
  *
- * You will need this when you append child pages to the main page in the sense of a onepager or
- * when you list all pages in a single onepager.
+ * You can use this when you append child pages to the parent page in the sense of a onepager or
+ * when you want to list all pages in a single onepager.
  */
 class Onepager {
 	/**
@@ -21,8 +21,8 @@ class Onepager {
 	 *
 	 * Define how the page structure is used in the theme.
 	 *
-	 * simple      Non-hierarchical structure where all the pages are dislayed after each other to form a onepager.
-	 * multi       Hierarchical theme structure where subpages are appended to the parent site as a onepager.
+	 * simple Non-hierarchical structure where all pages are dislayed after each other as a onepager.
+	 * multi  Hierarchical theme structure where subpages are appended to the parent site.
 	 *
 	 * @var string
 	 */
@@ -38,10 +38,11 @@ class Onepager {
 	/**
 	 * Onepager constructor.
 	 *
-	 * @param string $type       Onepager type.
-	 * @param array  $post_types The post types to apply the Onepager functionality to. Default `page`.
+	 * @param string $type       Onepager type. Default 'multi'.
+	 * @param array  $post_types The post types to apply the Onepager functionality to.
+	 *                           Default `[ 'page' ]`.
 	 */
-	public function __construct( $type = '', $post_types = [ 'page' ] ) {
+	public function __construct( $type = 'multi', $post_types = [ 'page' ] ) {
 		$this->type       = $type;
 		$this->post_types = $post_types;
 	}
@@ -70,6 +71,19 @@ class Onepager {
 	public function filter_page_link( $link, $post_id ) {
 		$post = get_post( $post_id );
 
+		/**
+		 * Filters whether the page link should be filtered.
+		 *
+		 * In certain setups, you might have subpages where you don’t want to filter the links for.
+		 * This filter allows you to disable filtering for certain links.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool $bailout   Whether to skip filtering the link. Passing a truthy value will
+		 *                        bail out of the filter and return the default link. Default `false`.
+		 * @param string $link    The link to filter.
+		 * @param int    $post_id The post ID the link belongs to.
+		 */
 		$bailout = apply_filters( 'theme/onepager/apply_link_filter', false, $link, $post_id );
 
 		if ( $bailout ) {
@@ -98,6 +112,19 @@ class Onepager {
 	 * @return string
 	 */
 	public function filter_get_sample_permalink( $permalink, $post_id, $title, $name, $post ) {
+		/**
+		 * Filters whether the page link should be filtered.
+		 *
+		 * In certain setups, you might have subpages where you don’t want to filter the links for.
+		 * This filter allows you to disable filtering for certain links.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool   $bailout   Whether to skip filtering the link. Passing a truthy value will
+		 *                          bail out of the filter and return the default link. Default `false`.
+		 * @param string $permalink The link to filter.
+		 * @param int    $post_id   The post ID the link belongs to.
+		 */
 		$bailout = apply_filters( 'theme/onepager/apply_link_filter', false, $permalink, $post_id );
 
 		if ( $bailout ) {
