@@ -4,6 +4,8 @@ namespace Theme\Onepager;
 
 use Theme\Onepager\Integrations\Caching;
 use Theme\Onepager\Integrations\WooCommerce;
+use Theme\Onepager\Integrations\Yoast;
+
 /**
  * Class Onepager
  *
@@ -50,9 +52,11 @@ class Onepager {
 	public function init() {
 		add_filter( 'page_link', [ $this, 'filter_page_link' ], 10, 2 );
 		add_filter( 'get_sample_permalink', [ $this, 'filter_get_sample_permalink' ], 10, 5 );
+
 		// Init third party integrations
 		( new Caching() )->init();
 		( new WooCommerce() )->init();
+		( new Yoast() )->init();
 	}
 
 	/**
