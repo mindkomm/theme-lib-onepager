@@ -4,15 +4,15 @@ namespace Theme\Onepager\Integrations;
 
 /**
  * Class WooCommerce
- *
- * @package Theme\Onepager\Integrations
  */
 class WooCommerce {
 	/**
 	 * Init hooks.
 	 */
 	public function init() {
-		add_filter( 'theme/onepager/apply_link_filter', [ $this, 'filter_apply_link' ], 10, 3 );
+		if ( function_exists( 'wc_get_page_id' ) ) {
+			add_filter( 'theme/onepager/apply_link_filter', [ $this, 'filter_apply_link' ], 10, 3 );
+		}
 	}
 
 	/**
@@ -29,6 +29,6 @@ class WooCommerce {
 			return true;
 		}
 
-		return false;
+		return $bailout;
 	}
 }

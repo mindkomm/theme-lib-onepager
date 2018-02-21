@@ -1,6 +1,6 @@
 <?php
 
-namespace Theme\Onepager;
+namespace Theme\Onepager\Integrations;
 
 use WP_Post;
 
