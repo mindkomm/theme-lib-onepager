@@ -36,13 +36,11 @@ class Yoast {
 	/**
 	 * Checks whether Yoast SEO plugin is active.
 	 *
+	 * @link https://yoast.com/wordpress-seo-plugin-theme-integration-guide/#plugincheck
+	 *
 	 * @return bool
 	 */
 	public function is_yoast_active() {
-		return in_array(
-			'wordpress-seo/wp-seo.php',
-			apply_filters( 'active_plugins', get_option( 'active_plugins' ) ),
-			true
-		);
+		return defined( 'WPSEO_VERSION' );
 	}
 }
