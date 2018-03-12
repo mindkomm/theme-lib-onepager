@@ -94,6 +94,11 @@ class Onepager {
 			// Make sure we have no permastruct
 			&& ! preg_match( '/\%\S+\%/i', $link ) >= 1
 		) {
+			// When it’s the front page, build up new link.
+			if ( (int) get_option( 'page_on_front' ) === (int) $post->post_parent ) {
+				$link = trailingslashit( home_url() ) . $post->post_name;
+			}
+
 			$link = make_anchor_link( $link );
 		}
 
@@ -132,6 +137,11 @@ class Onepager {
 		}
 
 		if ( $this->is_onepager_section( $post ) ) {
+			// Build new link for front page
+			if ( (int) get_option( 'page_on_front' ) === (int) $post->post_parent ) {
+				$permalink[0] = trailingslashit( home_url() ) . '%pagename%';
+			}
+
 			$permalink[0] = str_replace( '#', '', $permalink[0] );
 			$permalink[0] = make_anchor_link( $permalink[0] );
 		}
