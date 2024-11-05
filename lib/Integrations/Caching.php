@@ -45,19 +45,9 @@ class Caching {
 			return;
 		}
 
-		global $wp_fastest_cache;
-
 		if ( function_exists( 'rocket_clean_post' ) ) {
 			// WP Rocket
 			rocket_clean_post( $post->post_parent );
-
-		} elseif ( method_exists( $wp_fastest_cache, 'singleDeleteCache' ) ) {
-			// WP Fastest Cache
-			$wp_fastest_cache->singleDeleteCache( false, $post->post_parent );
-
-		} elseif ( function_exists( 'w3tc_pgcache_flush_post' ) ) {
-			// W3 Total Cache
-			w3tc_pgcache_flush_post( $post->post_parent );
 		}
 	}
 }
